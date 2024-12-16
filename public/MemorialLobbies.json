@@ -1,0 +1,59 @@
+[
+    {
+        "l2d": "/l2d/MisakaMikoto/CH9998_home.skel",
+        "bgm": "/l2d/bgm/Mitsukiyo - Guruguru Usagi.mp3",
+        "scale": 0.6,
+        "x": 900,
+        "y": 1280
+    },
+    { 
+        "l2d": "/l2d/ShokuhouMisaki/CH9997_home.skel",
+        "bgm": "/l2d/bgm/KARUT - Poppin' Memories.mp3",
+        "scale": 0.6,
+        "x": 900,
+        "y": 1280
+
+    }, 
+    {
+        "l2d": "/l2d/SatenRuiko/CH9996_home.skel",
+        "bgm": "/l2d/bgm/Mitsukiyo - Irasshaimase.mp3",
+        "scale": 0.6,
+        "x": 900,
+        "y": 1280
+    },
+    {
+        "l2d": "/l2d/HatsuneMiku/CH9999_home.skel",
+        "bgm": "/l2d/bgm/BlueNewWorld_Lobby.ogg",
+        "scale": 0.6,
+        "x": 900,
+        "y": 1280
+    },
+    {
+        "l2d": "/l2d/S.Hoshino/Hoshino_swimsuit_home.skel",
+        "bgm": "/l2d/bgm/Mitsukiyo - Dive into Summer.mp3",
+        "scale": 0.6,
+        "x": 900,
+        "y": 1280
+    },
+    {
+        "l2d": "/l2d/Momoi/Momoi_home.skel",
+        "bgm": "/l2d/bgm/Nor - After the Beep.mp3",
+        "scale": 0.6,
+        "x": 900,
+        "y": 1280
+    },
+    {
+        "l2d": "/l2d/Midori/Midori_home.skel",
+        "bgm": "/l2d/bgm/Mitsukiyo - Koi is Love.mp3",
+        "scale": 0.6,
+        "x": 900,
+        "y": 1280
+    },
+    {
+        "l2d": "/l2d/Momiji/momiji_home.skel",
+        "bgm": "/l2d/bgm/Mitsukiyo - Koi is Love.mp3",
+        "scale": 0.6,
+        "x": 900,
+        "y": 1280
+    }
+]

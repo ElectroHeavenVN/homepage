@@ -1,7 +1,7 @@
 <script setup>
 import { Spine } from 'pixi-spine'
 import * as PIXI from 'pixi.js'
-import { studentsL2D, bgmName } from '@/main'
+import { studentsL2Ds, bgmNames } from '@/main'
 import { sound } from '@pixi/sound'
 
 const props = defineProps(['l2dOnly'])
@@ -9,37 +9,66 @@ const props = defineProps(['l2dOnly'])
 let animation, id = 0
 
 const l2d = new PIXI.Application({
-  width: 2560,
+  width: 1920,
   height: 1440,
   backgroundAlpha: 0
 })
 
 document.querySelector('#background').appendChild(l2d.view)
 
+const emit = defineEmits(['update:switchL2D'])
+
+const changeL2D = (value) => {
+  emit('update:changeL2D', value)
+}
+
 const setL2D = (num) => {
   sound.stopAll()
   l2d.stage.removeChild(animation)
   switch (num) {
     case '-':
-      id = id === 0 ? studentsL2D.length - 1 : id - 1
+      id = id === 0 ? studentsL2Ds.length - 1 : id - 1
       break
     case '+':
-      id = id === studentsL2D.length - 1 ? 0 : id + 1
+      id = id === studentsL2Ds.length - 1 ? 0 : id + 1
       break
     default:
       id = num
   }
-  animation = new Spine(studentsL2D[id].spineData)
+  console.log(studentsL2Ds[id])
+  animation = new Spine(studentsL2Ds[id].l2d.spineData)
   l2d.stage.addChild(animation)
-  if (animation.state.hasAnimation('Idle_01')) {
-    animation.scale.set(.85)
-    animation.state.setAnimation(0, 'Idle_01', true)
+  if (animation.state.hasAnimation('Start_Idle_01'))
+  {
+    changeL2D(true)
+    animation.scale.set(studentsL2Ds[id].scale)
+    animation.state.setAnimation(0, 'Start_Idle_01', false)
     animation.state.timeScale = 1
     animation.autoUpdate = true
-    animation.y = 1440
-    animation.x = 2560 / 2
+    animation.x = studentsL2Ds[id].x 
+    animation.y = studentsL2Ds[id].y
+
+    let listener = {
+      complete: () => {
+        animation.state.setAnimation(0, 'Idle_01', true)
+        changeL2D(false)
+        animation.state.removeListener(listener)
+      }
+    }
+    animation.state.addListener(listener)
   }
-  sound.play(bgmName[id])
+  else {
+    changeL2D(false)
+    if (animation.state.hasAnimation('Idle_01')) {
+      animation.scale.set(studentsL2Ds[id].scale)
+      animation.state.setAnimation(0, 'Idle_01', true)
+      animation.state.timeScale = 1
+      animation.autoUpdate = true
+      animation.x = studentsL2Ds[id].x 
+      animation.y = studentsL2Ds[id].y
+    }
+  }
+  sound.play(bgmNames[id])
 }
 
 setL2D(id)

@@ -8,10 +8,11 @@ import Task from '@/components/Task.vue'
 import Loading from '@/components/Loading.vue'
 import Background from '@/components/Background.vue'
 import { ref } from 'vue'
+import OrientationNotification from '@/components/OrientationNotification.vue';
 
 const loading = ref(true)
 const percent = ref(1)
-const l2dOnly = ref(false)
+const l2dOnly = ref(true)
 
 import NProgress from 'nprogress'
 
@@ -40,7 +41,7 @@ const switchL2D = () => {
   </transition>
   <div id="background"></div>
   <main v-if="!loading">
-    <Background :l2dOnly="l2dOnly"></Background>
+    <Background :l2dOnly="l2dOnly" @update:changeL2D="l2dOnly = $event"></Background>
     <transition name="up">
       <Level v-if="!l2dOnly"></Level>
     </transition>
@@ -54,6 +55,7 @@ const switchL2D = () => {
     </transition>
     <div id="curtain"></div>
   </main>
+  <OrientationNotification />
   <Cursor></Cursor>
 </template>
 
@@ -61,6 +63,12 @@ const switchL2D = () => {
 main {
   display: flex;
   flex-direction: column;
+}
+
+#app:has(.rotate-notification) main,
+#app:has(.rotate-notification) #background,
+#app:has(.rotate-notification) .loading_wrapper {
+  display: none;
 }
 
 .loading-leave-to {

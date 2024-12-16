@@ -10,8 +10,6 @@ import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 import App from './App.vue'
 import { registerSW } from 'virtual:pwa-register'
 
-import { css } from './assets/font/BlueakaBeta2GBK-DemiBold.ttf';
-import { css as css2 } from './assets/font/BlueakaBeta2GBK-Bold.ttf';
 // console.log(css.family, css.weight);
 // console.log(css2.family, css2.weight);
 
@@ -25,8 +23,8 @@ if ('serviceWorker' in navigator) {
   const updateSW = registerSW({
     onNeedRefresh() {
       Modal.open({
-        title: '通知',
-        content: '老师，站点已更新，刷新即可访问最新内容！',
+        title: 'Thông báo',
+        content: 'Sensei, trang web đã được cập nhật, hãy làm mới để truy cập nội dung mới nhất!',
         onOk: () => {
           updateSW(true)
         }
@@ -58,32 +56,29 @@ setInterval(() => {
 import * as PIXI from 'pixi.js'
 import { sound } from '@pixi/sound'
 
-// 这里是学生的l2d载入位置，想要修改自己喜欢的学生可以改这里
-import hina_swimsuit from '/l2d/hina_swimsuit/CH0063_home.skel?url'
-import hina_bgm from '/l2d/hina_swimsuit/Theme_21.mp3'
-import aris from '/l2d/aris/Aris_home.skel?url'
-import aris_bgm from '/l2d/aris/Someday_-sometime.mp3'
-/*
- * students 是学生l2d的位置
- * l2dBGM 是学生背景音乐的位置
- * */
-const students = [hina_swimsuit, aris]
-const l2dBGM = [hina_bgm, aris_bgm]
+
 /*——————————————————————————————————————————————————*/
-export let studentsL2D = []
-export let bgmName = []
+export let studentsL2Ds = []
+export let bgmNames = []
 
 // 加载大厅L2D文件
 ;(async function () {
-  for (let i of students) {
-    studentsL2D.push(await PIXI.Assets.load(i))
-  }
-  for (let i of l2dBGM) {
-    sound.add(i.split('/').pop().split('.')[0], {
-      url: i,
-      loop: true
+  let students = await fetch('/MemorialLobbies.json');
+  students = await students.json();
+  for (let i = 0; i < students.length; i++) {
+    let student = students[i]
+    studentsL2Ds.push({
+      ...student,
+      l2d: await PIXI.Assets.load(student.l2d),
     })
-    bgmName.push(i.split('/').pop().split('.')[0])
+    let soundAlias = student.bgm.split('/').pop().split('.')[0]
+    if (!sound.exists(soundAlias)) 
+      sound.add(soundAlias, {
+        url: student.bgm,
+        loop: true,
+        volume: 0.1
+      })
+    bgmNames.push(soundAlias)
   }
 
   window.l2d_complete = true
