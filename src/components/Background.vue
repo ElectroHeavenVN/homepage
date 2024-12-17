@@ -44,13 +44,12 @@ const setL2D = (num) => {
   animation.scale.set(student.scale)
   animation.state.timeScale = .5
   animation.autoUpdate = true
-  animation.x = student.x 
+  animation.x = student.x
   animation.y = student.y
   let startIdle = 'Start_Idle_01';
   if (!animation.state.data.skeletonData.findAnimation('Start_Idle_01'))
     startIdle = 'Start_idle_01';
-  if (animation.state.data.skeletonData.findAnimation(startIdle))
-  {
+  if (animation.state.data.skeletonData.findAnimation(startIdle)) {
     changeL2D(true)
     animation.state.setAnimation(0, startIdle, false)
 
@@ -60,7 +59,7 @@ const setL2D = (num) => {
         if (animation.state.getCurrent(0).animation.name != "Idle_01" && animation.state.data.skeletonData.findAnimation('Idle_01')) {
           animation.state.setAnimation(0, 'Idle_01', true)
         }
-        animation.state.removeListener(listener)
+        animation.state.listeners = []
       }
     }
     animation.state.addListener(listener)
@@ -78,6 +77,7 @@ const skipStartIdle = () => {
   if (animation.state.getCurrent(0).animation.name != "Idle_01" && animation.state.data.skeletonData.findAnimation('Idle_01')) {
     changeL2D(false)
     animation.state.setAnimation(0, 'Idle_01', true)
+    animation.state.listeners = []
   }
 }
 
@@ -89,7 +89,8 @@ setL2D(Math.floor(Math.random() * studentsL2Ds.length))
     <img class="css-cursor-hover-enabled" @click="setL2D('-')" src="/l2d/arrow.png" alt="" />
     <img class="css-cursor-hover-enabled" @click="setL2D('+')" src="/l2d/arrow.png" alt="" />
   </div>
-  <div v-if="props.l2dOnly" style="color: transparent; position: fixed; top: 0; left: 0; width: 100%; height: 100%;" @click="skipStartIdle()"></div>
+  <div v-if="props.l2dOnly" style="color: transparent; position: fixed; top: 0; left: 0; width: 100%; height: 100%;"
+    @click="skipStartIdle()"></div>
 </template>
 
 <style scoped>
@@ -120,9 +121,11 @@ img:last-child {
   0% {
     transform: translateX(10px);
   }
+
   50% {
     transform: translateX(30px);
   }
+
   100% {
     transform: translateX(10px);
   }
@@ -132,9 +135,11 @@ img:last-child {
   0% {
     transform: rotate(180deg) translateX(10px);
   }
+
   50% {
     transform: rotate(180deg) translateX(30px);
   }
+
   100% {
     transform: rotate(180deg) translateX(10px);
   }
