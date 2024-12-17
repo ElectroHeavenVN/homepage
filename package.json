@@ -14,6 +14,8 @@
   },
   "dependencies": {
     "@esotericsoftware/spine-pixi-v8": "^4.2.69",
+    "@pixi/assets": "^7.4.2",
+    "@pixi/core": "^7.4.2",
     "@pixi/sound": "^5.2.2",
     "axios": "^1.5.0",
     "bin-wrapper": "npm:bin-wrapper-china",
