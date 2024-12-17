@@ -1,8 +1,6 @@
 import './assets/index.css'
 import '@arco-design/web-vue/dist/arco.css'
 
-import 'pixi-spine' // Do this once at the very start of your code. This registers the loader!
-
 import { createApp } from 'vue'
 import { Modal } from '@arco-design/web-vue'
 import ArcoVue from '@arco-design/web-vue'
@@ -55,31 +53,59 @@ setInterval(() => {
 
 import * as PIXI from 'pixi.js'
 import { sound } from '@pixi/sound'
-
+import * as pixiSpine from "@esotericsoftware/spine-pixi-v8";
 
 /*——————————————————————————————————————————————————*/
 export let studentsL2Ds = []
 export let bgmNames = []
 
-// 加载大厅L2D文件
 ;(async function () {
   let students = await fetch('/MemorialLobbies.json');
   students = await students.json();
-  for (let i = 0; i < students.length; i++) {
-    let student = students[i]
+  let fixedStudents = students.fixed;
+  let randomStudents = students.random;
+  for (let i = 0; i < fixedStudents.length; i++) {
+    let student = fixedStudents[i]
+    PIXI.Assets.add({ alias: student.name + '_skeleton', src: student.skel });
+    PIXI.Assets.add({ alias: student.name + '_atlas', src: student.atlas });
+    await PIXI.Assets.load([student.name + '_skeleton', student.name + '_atlas']);
     studentsL2Ds.push({
       ...student,
-      l2d: await PIXI.Assets.load(student.l2d),
+      skel: pixiSpine.Spine.from({
+        skeleton: student.name + '_skeleton',
+        atlas: student.name + '_atlas',
+      })
     })
     let soundAlias = student.bgm.split('/').pop().split('.')[0]
-    if (!sound.exists(soundAlias)) 
+    if (!sound.exists(soundAlias))
       sound.add(soundAlias, {
         url: student.bgm,
         loop: true,
-        volume: 0.1
+        volume: 0.02
       })
     bgmNames.push(soundAlias)
   }
-
+  for (let i = 0; i < 4; i++) {
+    let student = randomStudents[Math.floor(Math.random() * randomStudents.length)]
+    randomStudents = randomStudents.filter(s => s.name !== student.name)
+    PIXI.Assets.add({ alias: student.name + '_skeleton', src: student.skel });
+    PIXI.Assets.add({ alias: student.name + '_atlas', src: student.atlas });
+    await PIXI.Assets.load([student.name + '_skeleton', student.name + '_atlas']);
+    studentsL2Ds.push({
+      ...student,
+      skel: pixiSpine.Spine.from({
+        skeleton: student.name + '_skeleton',
+        atlas: student.name + '_atlas',
+      })
+    })
+    let soundAlias = student.bgm.split('/').pop().split('.')[0]
+    if (!sound.exists(soundAlias))
+      sound.add(soundAlias, {
+        url: student.bgm,
+        loop: true,
+        volume: 0.02
+      })
+    bgmNames.push(soundAlias)
+  }
   window.l2d_complete = true
 })()

@@ -1,13 +1,26 @@
 <script setup>
-import { ref } from 'vue'
+import { h, ref } from 'vue'
 import config from '/_config.json'
+import { Modal } from '@arco-design/web-vue'
 
 const exp = ref(config.exp)
 const nextExp = ref(config.nextExp)
+
+const showGameInfo = () => {
+  Modal.open({
+    title: 'ID card',
+    content: () => [
+      h('img', { class: 'id-card', src: 'img/ID_Card.png', style: 'height: 400px' }, ''),
+    ],
+    footer: false,
+    
+  })
+}
+
 </script>
 
 <template>
-  <div class="level-box">
+  <div class="level-box" @click="showGameInfo">
     <div class="container">
       <div class="level css-cursor-hover-enabled">
         <span>Lv.</span>

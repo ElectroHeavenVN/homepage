@@ -25,7 +25,7 @@ const hover = ref(window.matchMedia('(hover: none)').matches)
 
 const about = () => {
   Modal.open({
-    title: '关于',
+    title: 'Về trang này',
     content: () => [
       h(
         'p',
@@ -34,7 +34,7 @@ const about = () => {
           ? `© ${new Date().getFullYear()} 小鱼yuzifu`
           : [`© ${new Date().getFullYear()} ${config.author}`, h('p', {}, 'Made by 小鱼yuzifu')]
       ),
-      h('span', {}, '项目地址：'),
+      h('span', {}, 'Suộc code: '),
       h('a', { href: 'https://github.com/sf-yuzifu/homepage', target: '_blank' }, 'Github'),
       config.ICP
         ? [
@@ -89,7 +89,7 @@ setInterval(() => {
       }"
     >
       <img src="/img/gold.png" alt="" />
-      <span>11,451,419</span>
+      <span>53,102,982</span>
     </div>
     <div
       class="toolbox"
@@ -99,7 +99,7 @@ setInterval(() => {
       }"
     >
       <img src="/img/pyroxene.png" alt="" />
-      <span>24,000</span>
+      <span>49,658</span>
     </div>
     <a
       class="about toolbox"

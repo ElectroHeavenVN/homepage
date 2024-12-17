@@ -1,5 +1,4 @@
 <script setup>
-import { Spine } from 'pixi-spine'
 import * as PIXI from 'pixi.js'
 import { studentsL2Ds, bgmNames } from '@/main'
 import { sound } from '@pixi/sound'
@@ -8,15 +7,16 @@ const props = defineProps(['l2dOnly'])
 
 let animation, id = 0
 
-const l2d = new PIXI.Application({
+const l2d = new PIXI.Application()
+await l2d.init({
   width: 1920,
   height: 1440,
   backgroundAlpha: 0
 })
 
-document.querySelector('#background').appendChild(l2d.view)
+document.querySelector('#background').appendChild(l2d.canvas)
 
-const emit = defineEmits(['update:switchL2D'])
+const emit = defineEmits(['update:changeL2D'])
 
 const changeL2D = (value) => {
   emit('update:changeL2D', value)
@@ -35,23 +35,31 @@ const setL2D = (num) => {
     default:
       id = num
   }
-  console.log(studentsL2Ds[id])
-  animation = new Spine(studentsL2Ds[id].l2d.spineData)
+  let student = studentsL2Ds[id];
+  console.log(student)
+  animation = student.skel
   l2d.stage.addChild(animation)
-  if (animation.state.hasAnimation('Start_Idle_01'))
+  animation = student.skel
+  l2d.stage.addChild(animation)
+  animation.scale.set(student.scale)
+  animation.state.timeScale = .5
+  animation.autoUpdate = true
+  animation.x = student.x 
+  animation.y = student.y
+  let startIdle = 'Start_Idle_01';
+  if (!animation.state.data.skeletonData.findAnimation('Start_Idle_01'))
+    startIdle = 'Start_idle_01';
+  if (animation.state.data.skeletonData.findAnimation(startIdle))
   {
     changeL2D(true)
-    animation.scale.set(studentsL2Ds[id].scale)
-    animation.state.setAnimation(0, 'Start_Idle_01', false)
-    animation.state.timeScale = 1
-    animation.autoUpdate = true
-    animation.x = studentsL2Ds[id].x 
-    animation.y = studentsL2Ds[id].y
+    animation.state.setAnimation(0, startIdle, false)
 
     let listener = {
       complete: () => {
-        animation.state.setAnimation(0, 'Idle_01', true)
         changeL2D(false)
+        if (animation.state.getCurrent(0).animation.name != "Idle_01" && animation.state.data.skeletonData.findAnimation('Idle_01')) {
+          animation.state.setAnimation(0, 'Idle_01', true)
+        }
         animation.state.removeListener(listener)
       }
     }
@@ -59,19 +67,21 @@ const setL2D = (num) => {
   }
   else {
     changeL2D(false)
-    if (animation.state.hasAnimation('Idle_01')) {
-      animation.scale.set(studentsL2Ds[id].scale)
+    if (animation.state.getCurrent(0).animation.name != "Idle_01" && animation.state.data.skeletonData.findAnimation('Idle_01')) {
       animation.state.setAnimation(0, 'Idle_01', true)
-      animation.state.timeScale = 1
-      animation.autoUpdate = true
-      animation.x = studentsL2Ds[id].x 
-      animation.y = studentsL2Ds[id].y
     }
   }
   sound.play(bgmNames[id])
 }
 
-setL2D(id)
+const skipStartIdle = () => {
+  if (animation.state.getCurrent(0).animation.name != "Idle_01" && animation.state.data.skeletonData.findAnimation('Idle_01')) {
+    changeL2D(false)
+    animation.state.setAnimation(0, 'Idle_01', true)
+  }
+}
+
+setL2D(Math.floor(Math.random() * studentsL2Ds.length))
 </script>
 
 <template>
@@ -79,6 +89,7 @@ setL2D(id)
     <img class="css-cursor-hover-enabled" @click="setL2D('-')" src="/l2d/arrow.png" alt="" />
     <img class="css-cursor-hover-enabled" @click="setL2D('+')" src="/l2d/arrow.png" alt="" />
   </div>
+  <div v-if="props.l2dOnly" style="color: transparent; position: fixed; top: 0; left: 0; width: 100%; height: 100%;" @click="skipStartIdle()"></div>
 </template>
 
 <style scoped>

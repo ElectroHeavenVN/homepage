@@ -13,12 +13,12 @@
     "bin-wrapper": "npm:bin-wrapper-china"
   },
   "dependencies": {
+    "@esotericsoftware/spine-pixi-v8": "^4.2.69",
     "@pixi/sound": "^5.2.2",
     "axios": "^1.5.0",
     "bin-wrapper": "npm:bin-wrapper-china",
     "nprogress": "^0.2.0",
-    "pixi-spine": "^4.0.4",
-    "pixi.js": "^7.3.2",
+    "pixi.js": "^8.6.5",
     "rollup-plugin-copy": "^3.5.0",
     "vite-plugin-font": "^2.1.5",
     "vite-plugin-pwa": "^0.16.5",
@@ -38,7 +38,7 @@
     "vite": "^4.4.9",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-html": "^3.2.0",
-    "vite-plugin-imagemin": "^0.6.1"
+    "vite-plugin-imagemin": "^0.5.3"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

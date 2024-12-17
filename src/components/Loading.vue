@@ -3,12 +3,12 @@ import { ref } from 'vue'
 
 const prop = defineProps(['percent'])
 
-const imgUrl = ref('https://webcnstatic.yostar.net/ba_cn_web/prod/web/assets/avatar2.b84283e9.png')
+const imgUrl = ref('/img/arona_avatar_2.png')
 const imgList = [
-  'https://webcnstatic.yostar.net/ba_cn_web/prod/web/assets/avatar1.c18ce793.png',
-  'https://webcnstatic.yostar.net/ba_cn_web/prod/web/assets/avatar2.b84283e9.png',
-  'https://webcnstatic.yostar.net/ba_cn_web/prod/web/assets/avatar3.c9d108f1.png',
-  'https://webcnstatic.yostar.net/ba_cn_web/prod/web/assets/avatar4.8656c817.png'
+  '/img/arona_avatar_1.png',
+  '/img/arona_avatar_2.png',
+  '/img/arona_avatar_3.png',
+  '/img/arona_avatar_4.png'
 ]
 
 document.oncontextmenu = function () {
@@ -75,11 +75,11 @@ img {
 
 @font-face {
   font-family: TVPS-Vain-Capital-2;
-  src: url(https://webcnstatic.yostar.net/ba_cn_web/prod/web/assets/TVPS-Vain-Capital-2.cca90a05.ttf);
+  src: url(font/TVPS-Vain-Capital-2.ttf);
 }
 
 .loading_wrapper {
-  background: url('https://webcnstatic.yostar.net/ba_cn_web/prod/web/assets/loading_bg_pc.ba246778.png')
+  background: url('img/loading_bg_pc.png')
     center;
   background-size: cover;
   overflow: hidden;

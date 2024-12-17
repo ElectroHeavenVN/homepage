@@ -41,7 +41,9 @@ const switchL2D = () => {
   </transition>
   <div id="background"></div>
   <main v-if="!loading">
-    <Background :l2dOnly="l2dOnly" @update:changeL2D="l2dOnly = $event"></Background>
+    <Suspense>
+      <Background :l2dOnly="l2dOnly" @update:changeL2D="l2dOnly = $event"></Background>
+    </Suspense>
     <transition name="up">
       <Level v-if="!l2dOnly"></Level>
     </transition>
@@ -162,4 +164,10 @@ main {
   justify-content: center;
   overflow: hidden;
 }
+</style>
+
+<style>
+.arco-modal-body:has(.id-card) {
+    max-width: unset !important;
+  }
 </style>
