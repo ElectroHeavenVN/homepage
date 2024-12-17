@@ -75,11 +75,11 @@ img {
 
 @font-face {
   font-family: TVPS-Vain-Capital-2;
-  src: url(font/TVPS-Vain-Capital-2.ttf);
+  src: url(@/assets/font/TVPS-Vain-Capital-2.ttf);
 }
 
 .loading_wrapper {
-  background: url('img/loading_bg_pc.png')
+  background: url('$/img/loading_bg_pc.png')
     center;
   background-size: cover;
   overflow: hidden;

@@ -9,6 +9,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import config from './_config.json'
 import Font from 'vite-plugin-font'
+import { resolve } from 'node:path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -103,7 +104,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '$': fileURLToPath(new URL('./public', import.meta.url)),
     }
   }
 })
