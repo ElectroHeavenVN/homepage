@@ -84,8 +84,8 @@ setL2D(Math.floor(Math.random() * studentsL2Ds.length))
 
 <template>
   <div id="change" v-if="!props.l2dOnly">
-    <img class="css-cursor-hover-enabled" @click="setL2D('-')" src="/l2d/arrow.png" alt="" />
-    <img class="css-cursor-hover-enabled" @click="setL2D('+')" src="/l2d/arrow.png" alt="" />
+    <img class="css-cursor-hover-enabled" @click="setL2D('-')" src="/img/arrow.png" alt="" />
+    <img class="css-cursor-hover-enabled" @click="setL2D('+')" src="/img/arrow.png" alt="" />
   </div>
   <div v-if="props.l2dOnly" style="color: transparent; position: fixed; top: 0; left: 0; width: 100%; height: 100%;"
     @click="skipStartIdle()"></div>
