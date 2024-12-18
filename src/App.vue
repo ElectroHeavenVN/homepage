@@ -20,7 +20,7 @@ NProgress.start()
 
 const load = setInterval(() => {
   percent.value = NProgress.status
-  if (document.readyState === 'complete' && window.l2d_complete === true) {
+  if (document.readyState === 'complete' && window.loadComplete === true) {
     NProgress.done()
     percent.value = 1
     setTimeout(() => {

@@ -15,7 +15,7 @@ app.use(ArcoVueIcon);
 
 app.mount('#app');
 
-window.l2d_complete = false;
+window.loadComplete = false;
 
 setInterval(() => {
     document.querySelectorAll('a[href]:not(.tag)').forEach((link) => {
@@ -35,68 +35,68 @@ setInterval(() => {
     })
 }, 1000);
 
-export let studentsL2Ds = [];
+export let memorialLobbies = [];
 export let bgmNames = [];
 
 ; (async function () {
-    let students = await fetch('./MemorialLobbies.json');
-    students = await students.json();
-    let fixedStudents = students.fixed;
-    let randomStudents = students.random;
-    for (let i = 0; i < fixedStudents.length; i++) {
-        let student = fixedStudents[i];
+    let _memorialLobbies = await fetch('./MemorialLobbies.json');
+    _memorialLobbies = await _memorialLobbies.json();
+    let fixedMemorialLobbies = _memorialLobbies.fixed;
+    let randomMemorialLobbies = _memorialLobbies.random;
+    for (let i = 0; i < fixedMemorialLobbies.length; i++) {
+        let memorialLobby = fixedMemorialLobbies[i];
         let pathname = window.location.pathname;
         if (!pathname.endsWith('/')) 
             pathname += '/';
-        student.skel = pathname + student.skel;
-        student.atlas = pathname + student.atlas;
-        student.bgm = pathname + student.bgm;
-        PIXI.Assets.add({ alias: student.name + '_skeleton', src: student.skel });
-        PIXI.Assets.add({ alias: student.name + '_atlas', src: student.atlas });
-        await PIXI.Assets.load([student.name + '_skeleton', student.name + '_atlas']);
-        studentsL2Ds.push({
-            ...student,
+        memorialLobby.skel = pathname + memorialLobby.skel;
+        memorialLobby.atlas = pathname + memorialLobby.atlas;
+        memorialLobby.bgm = pathname + memorialLobby.bgm;
+        PIXI.Assets.add({ alias: memorialLobby.name + '_skeleton', src: memorialLobby.skel });
+        PIXI.Assets.add({ alias: memorialLobby.name + '_atlas', src: memorialLobby.atlas });
+        await PIXI.Assets.load([memorialLobby.name + '_skeleton', memorialLobby.name + '_atlas']);
+        memorialLobbies.push({
+            ...memorialLobby,
             spine: pixiSpine.Spine.from({
-                skeleton: student.name + '_skeleton',
-                atlas: student.name + '_atlas',
+                skeleton: memorialLobby.name + '_skeleton',
+                atlas: memorialLobby.name + '_atlas',
             })
         })
-        let soundAlias = student.bgm.split('/').pop().split('.')[0];
+        let soundAlias = memorialLobby.bgm.split('/').pop().split('.')[0];
         if (!sound.exists(soundAlias))
             sound.add(soundAlias, {
-                url: student.bgm,
+                url: memorialLobby.bgm,
                 loop: true,
                 volume: 0.02
             })
         bgmNames.push(soundAlias);
     }
-    for (let i = 0; i < 0; i++) {
-        let student = randomStudents[Math.floor(Math.random() * randomStudents.length)];
+    for (let i = 0; i < _memorialLobbies.randomAmount; i++) {
+        let memorialLobby = randomMemorialLobbies[Math.floor(Math.random() * randomMemorialLobbies.length)];
         let pathname = window.location.pathname;
         if (!pathname.endsWith('/')) 
             pathname += '/';
-        student.skel = pathname + student.skel;
-        student.atlas = pathname + student.atlas;
-        student.bgm = pathname + student.bgm;
-        randomStudents = randomStudents.filter(s => s.name !== student.name);
-        PIXI.Assets.add({ alias: student.name + '_skeleton', src: student.skel });
-        PIXI.Assets.add({ alias: student.name + '_atlas', src: student.atlas });
-        await PIXI.Assets.load([student.name + '_skeleton', student.name + '_atlas']);
-        studentsL2Ds.push({
-            ...student,
+        memorialLobby.skel = pathname + memorialLobby.skel;
+        memorialLobby.atlas = pathname + memorialLobby.atlas;
+        memorialLobby.bgm = pathname + memorialLobby.bgm;
+        randomMemorialLobbies = randomMemorialLobbies.filter(s => s.name !== memorialLobby.name);
+        PIXI.Assets.add({ alias: memorialLobby.name + '_skeleton', src: memorialLobby.skel });
+        PIXI.Assets.add({ alias: memorialLobby.name + '_atlas', src: memorialLobby.atlas });
+        await PIXI.Assets.load([memorialLobby.name + '_skeleton', memorialLobby.name + '_atlas']);
+        memorialLobbies.push({
+            ...memorialLobby,
             spine: pixiSpine.Spine.from({
-                skeleton: student.name + '_skeleton',
-                atlas: student.name + '_atlas',
+                skeleton: memorialLobby.name + '_skeleton',
+                atlas: memorialLobby.name + '_atlas',
             })
         })
-        let soundAlias = student.bgm.split('/').pop().split('.')[0];
+        let soundAlias = memorialLobby.bgm.split('/').pop().split('.')[0];
         if (!sound.exists(soundAlias));
             sound.add(soundAlias, {
-                url: student.bgm,
+                url: memorialLobby.bgm,
                 loop: true,
                 volume: 0.02
             })
         bgmNames.push(soundAlias);
     }
-    window.l2d_complete = true;
+    window.loadComplete = true;
 })()

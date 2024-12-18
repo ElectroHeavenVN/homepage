@@ -1,6 +1,6 @@
 <script setup>
 import * as PIXI from 'pixi.js'
-import { studentsL2Ds, bgmNames } from '@/main'
+import { memorialLobbies, bgmNames } from '@/main'
 import { sound } from '@pixi/sound'
 
 const props = defineProps(['l2dOnly'])
@@ -27,15 +27,15 @@ const setL2D = (num) => {
   l2d.stage.removeChildren();
   switch (num) {
     case '-':
-      id = id === 0 ? studentsL2Ds.length - 1 : id - 1
+      id = id === 0 ? memorialLobbies.length - 1 : id - 1
       break
     case '+':
-      id = id === studentsL2Ds.length - 1 ? 0 : id + 1
+      id = id === memorialLobbies.length - 1 ? 0 : id + 1
       break
     default:
       id = num
   }
-  let student = studentsL2Ds[id];
+  let student = memorialLobbies[id];
   console.log(student)
   animation = student.spine
   l2d.stage.addChild(animation)
@@ -79,7 +79,7 @@ const skipStartIdle = () => {
   }
 }
 
-setL2D(Math.floor(Math.random() * studentsL2Ds.length))
+setL2D(Math.floor(Math.random() * memorialLobbies.length))
 </script>
 
 <template>
