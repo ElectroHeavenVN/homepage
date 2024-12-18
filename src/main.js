@@ -70,7 +70,7 @@ export let bgmNames = [];
             })
         bgmNames.push(soundAlias);
     }
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 0; i++) {
         let student = randomStudents[Math.floor(Math.random() * randomStudents.length)];
         let pathname = window.location.pathname;
         if (!pathname.endsWith('/')) 

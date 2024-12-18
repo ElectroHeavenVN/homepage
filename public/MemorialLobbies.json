@@ -136,6 +136,24 @@
             "scale": 0.6,
             "x": 900,
             "y": 1280
+        },        
+        {
+            "name": "Momoi_Maid",
+            "skel": "memorialLobbies/M.Momoi/CH0201_home.skel",
+            "atlas": "memorialLobbies/M.Momoi/CH0201_home.atlas",
+            "bgm": "memorialLobbies/bgm/Theme_214.ogg",
+            "scale": 0.6,
+            "x": 1000,
+            "y": 1280
+        },
+        {
+            "name": "Midori_Maid",
+            "skel": "memorialLobbies/M.Midori/CH0202_home.skel",
+            "atlas": "memorialLobbies/M.Midori/CH0202_home.atlas",
+            "bgm": "memorialLobbies/bgm/Theme_220.ogg",
+            "scale": 0.6,
+            "x": 900,
+            "y": 1280
         }
     ]
 }
