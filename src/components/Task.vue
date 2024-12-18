@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import config from '/_config.json'
+import config from '/config.json'
 
 const curtain = ref(false)
 const bg = ref(false)
@@ -78,7 +78,7 @@ const skip = () => {
   right: 60px;
   width: 150px;
   height: 150px;
-  background: url('/task.png') center;
+  background: url('$/img/task.png') center;
   background-size: cover;
   transition: transform 0.1s;
 }

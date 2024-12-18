@@ -3,23 +3,20 @@ import { ref } from 'vue'
 
 const prop = defineProps(['percent'])
 
-const imgUrl = ref('/img/arona_avatar_2.png')
+const imgUrl = ref('./img/arona_avatar_2.png')
 const imgList = [
-  '/img/arona_avatar_1.png',
-  '/img/arona_avatar_2.png',
-  '/img/arona_avatar_3.png',
-  '/img/arona_avatar_4.png'
+  './img/arona_avatar_1.png',
+  './img/arona_avatar_2.png',
+  './img/arona_avatar_3.png',
+  './img/arona_avatar_4.png'
 ]
 
 document.oncontextmenu = function () {
   return false
 }
 const options = {
-  // 动画时长
   duration: 2000,
-  // 动画前后保持的状态
   fill: 'forwards',
-  // 动画缓动类型
   easing: 'ease-in-out'
 }
 let a = 0

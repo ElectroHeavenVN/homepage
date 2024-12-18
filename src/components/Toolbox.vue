@@ -1,7 +1,7 @@
 <script setup>
 import { Modal } from '@arco-design/web-vue'
 import { h, ref } from 'vue'
-import config from '/_config.json'
+import config from '/config.json'
 const emit = defineEmits(['switch'])
 const props = defineProps(['l2dOnly'])
 
@@ -19,7 +19,12 @@ const ap = ref(
           86400000)
     )
 )
-const img = ref('/img/max.png')
+
+let pathname = window.location.pathname;
+if (!pathname.endsWith('/')) 
+    pathname += '/';
+
+const img = ref(pathname + 'img/max.png')
 const showMin = ref(false)
 const hover = ref(window.matchMedia('(hover: none)').matches)
 
@@ -36,19 +41,13 @@ const about = () => {
       ),
       h('span', {}, 'Suộc code: '),
       h('a', { href: 'https://github.com/sf-yuzifu/homepage', target: '_blank' }, 'Github'),
-      config.ICP
-        ? [
-            h('br', {}, ''),
-            h('a', { href: 'https://beian.miit.gov.cn/', target: '_blank' }, config.ICP)
-          ]
-        : null
     ],
     footer: false
   })
 }
 
 const change = () => {
-  img.value = img.value === '/img/min.png' ? '/img/max.png' : '/img/min.png'
+  img.value = pathname + (img.value.endsWith('img/min.png') ? 'img/max.png' : 'img/min.png');
   emit('switch')
 }
 

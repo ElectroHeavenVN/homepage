@@ -1,46 +1,28 @@
 {
   "name": "homepage",
-  "version": "1.0.0",
   "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "vite --host",
+    "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
-  },
-  "resolutions": {
-    "bin-wrapper": "npm:bin-wrapper-china"
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@esotericsoftware/spine-pixi-v8": "^4.2.69",
+    "@arco-design/web-vue": "^2.56.3",
+    "@esotericsoftware/spine-pixi-v8": "^4.2.70",
     "@pixi/assets": "^7.4.2",
     "@pixi/core": "^7.4.2",
-    "@pixi/sound": "^5.2.2",
-    "axios": "^1.5.0",
-    "bin-wrapper": "npm:bin-wrapper-china",
+    "@pixi/sound": "^6.0.1",
     "nprogress": "^0.2.0",
-    "pixi.js": "^8.6.5",
-    "rollup-plugin-copy": "^3.5.0",
-    "vite-plugin-font": "^2.1.5",
-    "vite-plugin-pwa": "^0.16.5",
-    "vue": "^3.3.4",
-    "vue-i18n": "^9.4.1",
-    "vue-router": "^4.2.4"
+    "pixi.js": "^8.6.6",
+    "vite-plugin-font": "^4.0.0",
+    "vue": "^3.5.13",
+    "vue-i18n": "^10.0.5"
   },
   "devDependencies": {
-    "@arco-design/web-vue": "^2.51.2",
-    "@rushstack/eslint-patch": "^1.3.3",
-    "@vitejs/plugin-vue": "^4.3.4",
-    "@vitejs/plugin-vue-jsx": "^3.0.2",
-    "@vue/eslint-config-prettier": "^8.0.0",
-    "eslint": "^8.49.0",
-    "eslint-plugin-vue": "^9.17.0",
-    "prettier": "^3.0.3",
-    "vite": "^4.4.9",
-    "vite-plugin-compression": "^0.5.1",
-    "vite-plugin-html": "^3.2.0",
-    "vite-plugin-imagemin": "^0.5.3"
-  },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+    "@types/node": "^22.10.2",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "vite": "^6.0.1"
+  }
 }

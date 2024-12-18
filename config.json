@@ -1,0 +1,63 @@
+{
+  "author": "EHVN",
+  "manifest": {
+    "name": "ElectroHeavenVN's Homepage",
+    "short_name": "EHVN's Homepage",
+    "description": "ElectroHeavenVN's Homepage",
+    "theme_color": "",
+    "start_url": "/",
+    "id": "Homepage",
+    "icons": [
+      {
+        "src": "/favicon512.png",
+        "sizes": "512x512",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "/favicon144.png",
+        "sizes": "144x144"
+      }
+    ]
+  },
+  "level": 83,
+  "exp": 7650,
+  "nextExp": 8381,
+  "dock": [
+    {
+      "name": "Discord Server",
+      "href": "https://discord.gg/yzHjZbfuAR",
+      "imgSrc": "/icon/LuckyXMomo.png"
+    },
+    {
+      "name": "DataNRO",
+      "href": "https://electroheavenvn.github.io/DataNRO/",
+      "imgSrc": "/icon/datanro.png"
+    }
+  ],
+  "contact": [
+    {
+      "name": "Github",
+      "href": "https://github.com/ElectroHeavenVN",
+      "imgSrc": "/icon/github.svg"
+    },
+    {
+      "name": "Reddit",
+      "href": "https://reddit.com/user/ElectroHeavenVN/",
+      "imgSrc": "/icon/reddit.svg"
+    },
+    {
+      "name": "Telegram",
+      "href": "https://t.me/electroheavenvn",
+      "imgSrc": "/icon/telegram.svg"
+    },
+    {
+      "name": "YouTube",
+      "href": "https://youtube.com/channel/UCExHRQvvFTIRSv6B4rFUY8w",
+      "imgSrc": "/icon/youtube.svg"
+    }
+  ],
+  "task": {
+    "name": "Blog",
+    "href": "https://electroheavenvn.github.io/blog"
+  }
+}

@@ -1,11 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import config from '/_config.json'
-import { Icon } from '@arco-design/web-vue'
+import config from '/config.json'
 
-const IconFont = Icon.addFromIconFontCn({
-  src: config.iconfont
-})
 const time = ref(new Date().getHours() + ':' + new Date().getMinutes())
 
 const addZero = (time) => {
@@ -15,14 +11,17 @@ const addZero = (time) => {
 setInterval(() => {
   time.value = addZero(new Date().getHours()) + ':' + addZero(new Date().getMinutes())
 }, 1000)
+
+let pathname = window.location.pathname;
+if (!pathname.endsWith('/')) 
+    pathname += '/';
 </script>
 
 <template>
   <div class="footer">
     <div class="project-box">
       <a v-for="site in config.dock" :href="site.href" class="project css-cursor-hover-enabled">
-        <img v-if="site.imgSrc" :src="site.imgSrc" alt="" />
-        <icon-font v-if="site.iconfont" :type="site.iconfont" />
+        <img v-if="site.imgSrc" :src="pathname + site.imgSrc" alt="" />
         <span>{{ site.name }}</span>
       </a>
     </div>

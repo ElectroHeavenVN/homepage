@@ -1,6 +1,6 @@
 <script setup>
 import { h, ref } from 'vue'
-import config from '/_config.json'
+import config from '/config.json'
 import { Modal } from '@arco-design/web-vue'
 
 const exp = ref(config.exp)
@@ -11,6 +11,7 @@ const showGameInfo = () => {
     title: 'ID card',
     content: () => [
       h('img', { class: 'id-card', src: 'img/ID_Card.png', style: 'height: 400px' }, ''),
+      h('p', {}, "Server: NA"),
     ],
     footer: false,
     

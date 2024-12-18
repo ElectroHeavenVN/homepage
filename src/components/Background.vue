@@ -24,7 +24,7 @@ const changeL2D = (value) => {
 
 const setL2D = (num) => {
   sound.stopAll()
-  l2d.stage.removeChild(animation)
+  l2d.stage.removeChildren();
   switch (num) {
     case '-':
       id = id === 0 ? studentsL2Ds.length - 1 : id - 1
@@ -37,9 +37,7 @@ const setL2D = (num) => {
   }
   let student = studentsL2Ds[id];
   console.log(student)
-  animation = student.skel
-  l2d.stage.addChild(animation)
-  animation = student.skel
+  animation = student.spine
   l2d.stage.addChild(animation)
   animation.scale.set(student.scale)
   animation.state.timeScale = .5
