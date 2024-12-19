@@ -36,6 +36,11 @@
   ],
   "contact": [
     {
+      "name": "YouTube",
+      "href": "https://youtube.com/channel/UCExHRQvvFTIRSv6B4rFUY8w",
+      "imgSrc": "/icon/youtube.svg"
+    },
+    {
       "name": "Github",
       "href": "https://github.com/ElectroHeavenVN",
       "imgSrc": "/icon/github.svg"
@@ -49,11 +54,6 @@
       "name": "Telegram",
       "href": "https://t.me/electroheavenvn",
       "imgSrc": "/icon/telegram.svg"
-    },
-    {
-      "name": "YouTube",
-      "href": "https://youtube.com/channel/UCExHRQvvFTIRSv6B4rFUY8w",
-      "imgSrc": "/icon/youtube.svg"
     }
   ],
   "task": {
