@@ -129,7 +129,7 @@ if (!pathname.endsWith('/'))
   height: 64px;
 }
 
-@media screen and (max-width: 830px) {
+/* @media screen and (max-width: 830px) {
   .project-box {
     width: 100%;
     justify-content: space-evenly;
@@ -147,7 +147,7 @@ if (!pathname.endsWith('/'))
   .project span {
     display: none;
   }
-}
+} */
 
 @media screen and (max-width: 600px) {
   .project img {

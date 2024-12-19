@@ -166,28 +166,40 @@ main {
 
 <style>
 main, .arco-overlay, .loading_wrapper {
-  zoom: 0.6;
+  zoom: 0.4;
 }
 
-@media only screen and (min-width: 830px) {
+@media only screen and (min-width: 650px) and (min-height: 330px) {
+  main, .arco-overlay, .loading_wrapper {
+    zoom: 0.5;
+  }
+}
+
+@media only screen and (min-width: 700px) and (min-height: 350px) {
+  main, .arco-overlay, .loading_wrapper {
+    zoom: 0.6;
+  }
+}
+
+@media only screen and (min-width: 850px) and (min-height: 375px) {
   main, .arco-overlay, .loading_wrapper {
     zoom: 0.7;
   }
 }
 
-@media only screen and (min-width: 940px) {
+@media only screen and (min-width: 950px) and (min-height: 400px) {
   main, .arco-overlay, .loading_wrapper {
     zoom: 0.8;
   }
 }
 
-@media only screen and (min-width: 1060px) {
+@media only screen and (min-width: 1060px) and (min-height: 500px) {
   main, .arco-overlay, .loading_wrapper {
     zoom: 0.9;
   }
 }
 
-@media only screen and (min-width: 1175px) {
+@media only screen and (min-width: 1175px) and (min-height: 700px) {
   main, .arco-overlay, .loading_wrapper {
     zoom: 1;
   }

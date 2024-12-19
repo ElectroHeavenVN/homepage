@@ -62,7 +62,7 @@ const l2dHold = () =>
     else 
       document.documentElement.requestFullscreen();
       l2dRelease();
-  }, 1000);
+  }, 500);
 }
 
 const l2dRelease = () => {
@@ -147,15 +147,17 @@ setInterval(() => {
       :class="{ canHover: !hover }"
       @click="change"
       @mousedown="l2dHold"
+      @touchstart="l2dHold"
       @mouseRelease="l2dRelease"
       @mouseup="l2dRelease"
+      @touchend="l2dRelease"
       :style="{
         transform: (!props.l2dOnly ? 'translateY(0)' : 'translateY(-76px)') + ' skew(-10deg)',
         transition: 'transform 0.3s ' + (!props.l2dOnly ? 'ease-out' : 'ease-in') + ',opacity 0.6s',
         opacity: !props.l2dOnly || (showMin && hover) ? 1 : 0
       }"
     >
-      <img alt="" :src="img" />
+      <img alt="" :src="img" style="pointer-events:none;"/>
     </a>
   </div>
 </template>
@@ -241,7 +243,7 @@ setInterval(() => {
   transform: skew(10deg);
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 480px) {
   .toolbox:not(.about) {
     display: none;
   }
