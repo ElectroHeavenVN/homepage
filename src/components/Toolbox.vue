@@ -132,6 +132,16 @@ setInterval(() => {
     >
       <icon-info-circle class="css-cursor-hover-enabled" />
     </a>
+    <a 
+    class="toolbox github"
+    :style="{
+        transform: (!props.l2dOnly ? 'translateY(0)' : 'translateY(-300px)') + ' skew(-10deg)',
+        transition: 'transform 0.3s ' + (!props.l2dOnly ? 'ease-out' : 'ease-in')
+      }"
+    href="https://github.com/ElectroHeavenVN/homepage/"
+    >
+      <img src="/icon/github.svg" alt="GitHub Repository" />
+    </a>
     <a
       class="l2d toolbox"
       :class="{ canHover: !hover }"
@@ -185,24 +195,35 @@ setInterval(() => {
 }
 
 .toolbox-box .toolbox.about,
-.toolbox-box .toolbox.l2d {
+.toolbox-box .toolbox.l2d,
+.toolbox-box .toolbox.github {
   width: 80px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-.toolbox-box .toolbox.l2d {
+.toolbox-box .toolbox.l2d,
+.toolbox-box .toolbox.github {
   position: absolute;
   right: 0;
   top: 76px;
   overflow: hidden;
 }
 
-.toolbox.l2d img {
+.toolbox-box .toolbox.github {
+  right: 100px;
+}
+
+.toolbox.l2d img,
+.toolbox.github img {
   filter: drop-shadow(-100vw 0px 0px #003153);
   transform: translateX(100vw);
   height: 32px;
+}
+
+.toolbox.github img {
+  transform: skew(10deg);
 }
 
 .toolbox-box .toolbox:hover {
@@ -210,7 +231,8 @@ setInterval(() => {
 }
 
 .toolbox-box .toolbox.about:active,
-.toolbox-box .toolbox.l2d:active {
+.toolbox-box .toolbox.l2d:active,
+.toolbox-box .toolbox.github:active {
   transform: skew(-10deg) scale(0.9);
 }
 
@@ -222,6 +244,10 @@ setInterval(() => {
 @media screen and (max-width: 700px) {
   .toolbox:not(.about) {
     display: none;
+  }
+  
+  a.toolbox.github {
+    display: none !important;
   }
 }
 
