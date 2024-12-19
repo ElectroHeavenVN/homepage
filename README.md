@@ -4,7 +4,7 @@
 <br>Xem ngay tại: https://electroheavenvn.github.io/homepage/.
 
 ## Vấn đề đã biết
-- Texture của `Sakurako_Idol` sẽ bị lỗi nếu như không được hiển thị đầu tiên khi mở trang.
+- Texture của `Sakurako_Idol` sẽ bị lỗi nếu không được hiển thị đầu tiên khi mở trang.
 - Nếu `Sakurako_Idol` được hiển thị đầu tiên, texture của các học sinh khác có thể bị lỗi.
 ---
 # Tôi đéo biết tiếng Trung Quốc
