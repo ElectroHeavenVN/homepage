@@ -1,11 +1,15 @@
 <script setup>
-import * as PIXI from 'pixi.js'
-import { memorialLobbies, bgmNames } from '@/main'
-import { sound } from '@pixi/sound'
+import * as PIXI from 'pixi.js';
+import { memorialLobbies, bgmNames } from '@/main';
+import { sound } from '@pixi/sound';
+import {Howl, Howler} from 'howler';
 
 const props = defineProps(['l2dOnly'])
 
-let animation, id = 0
+let animation, id = 0;
+let soundList = [];
+let talking = false, talkIndex = 1;
+let canSkip = true;
 
 const l2d = new PIXI.Application()
 await l2d.init({
@@ -14,68 +18,126 @@ await l2d.init({
   backgroundAlpha: 0
 })
 
-document.querySelector('#background').appendChild(l2d.canvas)
+document.querySelector('#background').appendChild(l2d.canvas);
 
-const emit = defineEmits(['update:changeL2D'])
+const emit = defineEmits(['update:changeL2D']);
+
+const onEvent = (entry, event) => {
+  console.log(event);
+  if (event.stringValue == '')
+    return;
+  let pathname = window.location.pathname;
+  if (!pathname.endsWith('/')) 
+      pathname += '/';
+  let voice = new Howl({
+      src: [pathname + memorialLobbies[id].path + event.stringValue + '.ogg'],
+      volume: 0.3,
+      onend: () => {
+          talking = false;
+      }
+  });
+  if (voice.state() == 'loaded')
+      voice.play();
+  else if (voice.state() == 'loading') {
+      voice.on('load', () => {
+          voice.play();
+      })
+  }
+  soundList.push(voice);
+}
 
 const changeL2D = (value) => {
-  emit('update:changeL2D', value)
+  emit('update:changeL2D', value);
 }
 
 const setL2D = (num) => {
-  sound.stopAll()
+  canSkip = true;
+  talking = false;
+  talkIndex = 1;
+  sound.stopAll();
+  if (soundList.length != 0) {
+    for (var i in soundList) 
+      soundList[i].stop();
+    soundList = [];
+  }
   l2d.stage.removeChildren();
   switch (num) {
     case '-':
-      id = id === 0 ? memorialLobbies.length - 1 : id - 1
+      id = id === 0 ? memorialLobbies.length - 1 : id - 1;
       break
     case '+':
-      id = id === memorialLobbies.length - 1 ? 0 : id + 1
+      id = id === memorialLobbies.length - 1 ? 0 : id + 1;
       break
     default:
-      id = num
+      id = num;
   }
   let student = memorialLobbies[id];
-  console.log(student)
-  animation = student.spine
-  l2d.stage.addChild(animation)
-  animation.scale.set(student.scale)
-  animation.x = student.x
-  animation.y = student.y
+  console.log(student);
+  animation = student.spine;
+  l2d.stage.addChild(animation);
+  animation.scale.set(student.scale);
+  animation.x = student.x;
+  animation.y = student.y;
   let startIdle = 'Start_Idle_01';
-  if (!animation.state.data.skeletonData.findAnimation('Start_Idle_01'))
+  if (!animation.state.data.skeletonData.findAnimation('Start_Idle_01'))  //Special case for Hoshino_Armed
     startIdle = 'Start_idle_01';
   if (animation.state.data.skeletonData.findAnimation(startIdle)) {
-    changeL2D(true)
-    animation.state.setAnimation(0, startIdle, false)
+    changeL2D(true);
+    animation.state.setAnimation(0, startIdle, false);
 
     let listener = {
       complete: () => {
-        changeL2D(false)
+        changeL2D(false);
         if (animation.state.getCurrent(0).animation.name != "Idle_01" && animation.state.data.skeletonData.findAnimation('Idle_01')) {
-          animation.state.setAnimation(0, 'Idle_01', true)
+          animation.state.setAnimation(0, 'Idle_01', true);
         }
-        animation.state.listeners = []
+        animation.state.listeners = [];
+        animation.state.addListener({
+          event: onEvent
+        });
+        canSkip = false;
       }
     }
-    animation.state.addListener(listener)
+    animation.state.addListener(listener);
   }
   else {
-    changeL2D(false)
+    changeL2D(false);
     if (animation.state.getCurrent(0).animation.name != "Idle_01" && animation.state.data.skeletonData.findAnimation('Idle_01')) {
-      animation.state.setAnimation(0, 'Idle_01', true)
+      animation.state.setAnimation(0, 'Idle_01', true);
+      animation.state.listeners = [];
+      animation.state.addListener({
+        event: onEvent
+      });
+      canSkip = false;
     }
   }
-  sound.play(bgmNames[id])
+  sound.play(bgmNames[id]);
 }
 
 const skipStartIdle = () => {
   if (animation.state.getCurrent(0).animation.name != "Idle_01" && animation.state.data.skeletonData.findAnimation('Idle_01')) {
-    changeL2D(false)
-    animation.state.setAnimation(0, 'Idle_01', true)
-    animation.state.listeners = []
+    changeL2D(false);
+    animation.state.setAnimation(0, 'Idle_01', true);
+    animation.state.listeners = [];
+    animation.state.addListener({
+      event: onEvent
+    });
+    canSkip = false;
   }
 }
+
+const onInteractionWithStudent = () => {
+  if (talking || animation.state.getCurrent(0).animation.name.toLowerCase().startsWith('start_idle')) 
+    return;
+  console.log('Talk_0' + talkIndex);
+  animation.state.addAnimation(1, 'Talk_0' + talkIndex + '_A');
+  animation.state.addAnimation(2, 'Talk_0' + talkIndex + '_M');
+  talkIndex++;
+  if (!animation.state.data.skeletonData.findAnimation('Talk_0' + talkIndex + '_A')) 
+    talkIndex = 1;
+  talking = true;
+}
+
 //There are some problem with Sakurako_Idol which I didn't know how to fix yet
 // let sakurakoIdolIndex = memorialLobbies.findIndex(s => s.name === 'Sakurako_Idol');
 // if (sakurakoIdolIndex !== -1) 
@@ -89,7 +151,9 @@ const skipStartIdle = () => {
     <img class="css-cursor-hover-enabled" @click="setL2D('-')" src="/img/arrow.png" alt="" />
     <img class="css-cursor-hover-enabled" @click="setL2D('+')" src="/img/arrow.png" alt="" />
   </div>
-  <div v-if="props.l2dOnly" style="color: transparent; position: fixed; top: 0; left: 0; width: 100%; height: 100%;"
+  <div style="color: transparent; position: fixed; top: 0; left: 0; width: 100%; height: 100%;"
+    @click="onInteractionWithStudent()"></div>
+  <div v-if="props.l2dOnly && canSkip" style="color: transparent; position: fixed; top: 0; left: 0; width: 100%; height: 100%;"
     @click="skipStartIdle()"></div>
 </template>
 

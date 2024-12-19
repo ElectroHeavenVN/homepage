@@ -14,6 +14,7 @@
     "@pixi/assets": "^7.4.2",
     "@pixi/core": "^7.4.2",
     "@pixi/sound": "^6.0.1",
+    "howler": "^2.2.4",
     "nprogress": "^0.2.0",
     "pixi.js": "^8.6.6",
     "vite-plugin-font": "^4.0.0",

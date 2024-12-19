@@ -43,11 +43,8 @@ async function loadSpine(memorialLobby)
     let pathname = window.location.pathname;
     if (!pathname.endsWith('/')) 
         pathname += '/';
-    memorialLobby.skel = pathname + memorialLobby.skel;
-    memorialLobby.atlas = pathname + memorialLobby.atlas;
-    memorialLobby.bgm = pathname + memorialLobby.bgm;
-    PIXI.Assets.add({ alias: memorialLobby.name + '_skeleton', src: memorialLobby.skel });
-    PIXI.Assets.add({ alias: memorialLobby.name + '_atlas', src: memorialLobby.atlas });
+    PIXI.Assets.add({ alias: memorialLobby.name + '_skeleton', src: pathname + memorialLobby.path + memorialLobby.skel });
+    PIXI.Assets.add({ alias: memorialLobby.name + '_atlas', src: pathname + memorialLobby.path + memorialLobby.atlas });
     await PIXI.Assets.load([memorialLobby.name + '_skeleton', memorialLobby.name + '_atlas']);
     return pixiSpine.Spine.from({
         skeleton: memorialLobby.name + '_skeleton',
@@ -73,10 +70,16 @@ async function loadSpine(memorialLobby)
             ...memorialLobby,
             spine: await loadSpine(memorialLobby)
         });
-        let soundAlias = memorialLobby.bgm.split('/').pop().split('.')[0];
+
+        let pathname = window.location.pathname;
+        if (!pathname.endsWith('/')) 
+            pathname += '/';
+        let bgmUrl = pathname + 'MemorialLobbies/bgm/' + memorialLobby.bgm;
+
+        let soundAlias = memorialLobby.bgm.split('.')[0];
         if (!sound.exists(soundAlias))
             sound.add(soundAlias, {
-                url: memorialLobby.bgm,
+                url: bgmUrl,
                 loop: true,
                 volume: 0.02
             });
