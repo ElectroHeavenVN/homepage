@@ -111,9 +111,9 @@
             "y": 1280
         },
         {
-            "name": "Hoshino_Tactial",
-            "skel": "memorialLobbies/T.Hoshino/CH0258_home.skel",
-            "atlas": "memorialLobbies/T.Hoshino/CH0258_home.atlas",
+            "name": "Hoshino_Armed",
+            "skel": "memorialLobbies/A.Hoshino/CH0258_home.skel",
+            "atlas": "memorialLobbies/A.Hoshino/CH0258_home.atlas",
             "bgm": "memorialLobbies/bgm/Theme_234.ogg",
             "scale": 0.6,
             "x": 900,
