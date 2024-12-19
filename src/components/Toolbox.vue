@@ -51,6 +51,28 @@ const change = () => {
   emit('switch')
 }
 
+let l2dHoldTimeout;
+
+const l2dHold = () => 
+{
+  l2dHoldTimeout = setTimeout(() => 
+  {
+    if (document.fullscreenElement) 
+      document.exitFullscreen();
+    else 
+      document.documentElement.requestFullscreen();
+      l2dRelease();
+  }, 1000);
+}
+
+const l2dRelease = () => {
+  if (l2dHoldTimeout) 
+  {
+    clearTimeout(l2dHoldTimeout);
+    l2dHoldTimeout = null;
+  }
+}
+
 document.body.addEventListener('click', () => {
   if (props.l2dOnly && hover.value) {
     showMin.value = !showMin.value
@@ -114,6 +136,9 @@ setInterval(() => {
       class="l2d toolbox"
       :class="{ canHover: !hover }"
       @click="change"
+      @mousedown="l2dHold"
+      @mouseRelease="l2dRelease"
+      @mouseup="l2dRelease"
       :style="{
         transform: (!props.l2dOnly ? 'translateY(0)' : 'translateY(-76px)') + ' skew(-10deg)',
         transition: 'transform 0.3s ' + (!props.l2dOnly ? 'ease-out' : 'ease-in') + ',opacity 0.6s',
@@ -194,7 +219,7 @@ setInterval(() => {
   transform: skew(10deg);
 }
 
-@media screen and (max-width: 1199px) {
+@media screen and (max-width: 700px) {
   .toolbox:not(.about) {
     display: none;
   }

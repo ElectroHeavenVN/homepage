@@ -65,6 +65,13 @@ const switchL2D = () => {
 main {
   display: flex;
   flex-direction: column;
+  zoom: 0.6;
+}
+
+@media only screen and (min-width: 1000px) {
+  main {
+    zoom: 1;
+  }
 }
 
 #app:has(.rotate-notification) main,
