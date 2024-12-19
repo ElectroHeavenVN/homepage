@@ -40,8 +40,6 @@ const setL2D = (num) => {
   animation = student.spine
   l2d.stage.addChild(animation)
   animation.scale.set(student.scale)
-  animation.state.timeScale = .5
-  animation.autoUpdate = true
   animation.x = student.x
   animation.y = student.y
   let startIdle = 'Start_Idle_01';
@@ -78,8 +76,12 @@ const skipStartIdle = () => {
     animation.state.listeners = []
   }
 }
-
-setL2D(Math.floor(Math.random() * memorialLobbies.length))
+//There are some problem with Sakurako_Idol which I didn't know how to fix yet
+// let sakurakoIdolIndex = memorialLobbies.findIndex(s => s.name === 'Sakurako_Idol');
+// if (sakurakoIdolIndex !== -1) 
+//   setL2D(sakurakoIdolIndex);
+// else
+  setL2D(Math.floor(Math.random() * memorialLobbies.length));
 </script>
 
 <template>
