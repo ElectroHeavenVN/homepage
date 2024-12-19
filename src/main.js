@@ -38,64 +38,48 @@ setInterval(() => {
 export let memorialLobbies = [];
 export let bgmNames = [];
 
+async function loadSpine(memorialLobby)
+{
+    let pathname = window.location.pathname;
+    if (!pathname.endsWith('/')) 
+        pathname += '/';
+    memorialLobby.skel = pathname + memorialLobby.skel;
+    memorialLobby.atlas = pathname + memorialLobby.atlas;
+    memorialLobby.bgm = pathname + memorialLobby.bgm;
+    PIXI.Assets.add({ alias: memorialLobby.name + '_skeleton', src: memorialLobby.skel });
+    PIXI.Assets.add({ alias: memorialLobby.name + '_atlas', src: memorialLobby.atlas });
+    await PIXI.Assets.load([memorialLobby.name + '_skeleton', memorialLobby.name + '_atlas']);
+    return pixiSpine.Spine.from({
+        skeleton: memorialLobby.name + '_skeleton',
+        atlas: memorialLobby.name + '_atlas',
+    })
+}
+
 ; (async function () {
     let _memorialLobbies = await fetch('./MemorialLobbies.json');
     _memorialLobbies = await _memorialLobbies.json();
-    let fixedMemorialLobbies = _memorialLobbies.fixed;
+    
     let randomMemorialLobbies = _memorialLobbies.random;
-    for (let i = 0; i < fixedMemorialLobbies.length; i++) {
-        let memorialLobby = fixedMemorialLobbies[i];
-        let pathname = window.location.pathname;
-        if (!pathname.endsWith('/')) 
-            pathname += '/';
-        memorialLobby.skel = pathname + memorialLobby.skel;
-        memorialLobby.atlas = pathname + memorialLobby.atlas;
-        memorialLobby.bgm = pathname + memorialLobby.bgm;
-        PIXI.Assets.add({ alias: memorialLobby.name + '_skeleton', src: memorialLobby.skel });
-        PIXI.Assets.add({ alias: memorialLobby.name + '_atlas', src: memorialLobby.atlas });
-        await PIXI.Assets.load([memorialLobby.name + '_skeleton', memorialLobby.name + '_atlas']);
+    let memorialLobbiesToUse = [..._memorialLobbies.fixed];
+    for (let i = 0; i < _memorialLobbies.randomAmount; i++) {
+        let memorialLobby = randomMemorialLobbies[Math.floor(Math.random() * randomMemorialLobbies.length)];
+        randomMemorialLobbies = randomMemorialLobbies.filter(s => s.name !== memorialLobby.name);
+        memorialLobbiesToUse.push(memorialLobby);
+    }
+
+    for (let i = 0; i < memorialLobbiesToUse.length; i++) {
+        let memorialLobby = memorialLobbiesToUse[i];
         memorialLobbies.push({
             ...memorialLobby,
-            spine: pixiSpine.Spine.from({
-                skeleton: memorialLobby.name + '_skeleton',
-                atlas: memorialLobby.name + '_atlas',
-            })
-        })
+            spine: await loadSpine(memorialLobby)
+        });
         let soundAlias = memorialLobby.bgm.split('/').pop().split('.')[0];
         if (!sound.exists(soundAlias))
             sound.add(soundAlias, {
                 url: memorialLobby.bgm,
                 loop: true,
                 volume: 0.02
-            })
-        bgmNames.push(soundAlias);
-    }
-    for (let i = 0; i < _memorialLobbies.randomAmount; i++) {
-        let memorialLobby = randomMemorialLobbies[Math.floor(Math.random() * randomMemorialLobbies.length)];
-        let pathname = window.location.pathname;
-        if (!pathname.endsWith('/')) 
-            pathname += '/';
-        memorialLobby.skel = pathname + memorialLobby.skel;
-        memorialLobby.atlas = pathname + memorialLobby.atlas;
-        memorialLobby.bgm = pathname + memorialLobby.bgm;
-        randomMemorialLobbies = randomMemorialLobbies.filter(s => s.name !== memorialLobby.name);
-        PIXI.Assets.add({ alias: memorialLobby.name + '_skeleton', src: memorialLobby.skel });
-        PIXI.Assets.add({ alias: memorialLobby.name + '_atlas', src: memorialLobby.atlas });
-        await PIXI.Assets.load([memorialLobby.name + '_skeleton', memorialLobby.name + '_atlas']);
-        memorialLobbies.push({
-            ...memorialLobby,
-            spine: pixiSpine.Spine.from({
-                skeleton: memorialLobby.name + '_skeleton',
-                atlas: memorialLobby.name + '_atlas',
-            })
-        })
-        let soundAlias = memorialLobby.bgm.split('/').pop().split('.')[0];
-        if (!sound.exists(soundAlias));
-            sound.add(soundAlias, {
-                url: memorialLobby.bgm,
-                loop: true,
-                volume: 0.02
-            })
+            });
         bgmNames.push(soundAlias);
     }
     window.loadComplete = true;
