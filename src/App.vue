@@ -8,7 +8,6 @@ import Task from '@/components/Task.vue'
 import Loading from '@/components/Loading.vue'
 import Background from '@/components/Background.vue'
 import { ref } from 'vue'
-import OrientationNotification from '@/components/OrientationNotification.vue';
 
 const loading = ref(true)
 const percent = ref(1)
@@ -57,7 +56,6 @@ const switchL2D = () => {
     </transition>
     <div id="curtain"></div>
   </main>
-  <OrientationNotification />
   <Cursor></Cursor>
 </template>
 
@@ -68,7 +66,25 @@ main {
   zoom: 0.6;
 }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 830px) {
+  main {
+    zoom: 0.7;
+  }
+}
+
+@media only screen and (min-width: 940px) {
+  main {
+    zoom: 0.8;
+  }
+}
+
+@media only screen and (min-width: 1060px) {
+  main {
+    zoom: 0.9;
+  }
+}
+
+@media only screen and (min-width: 1175px) {
   main {
     zoom: 1;
   }
