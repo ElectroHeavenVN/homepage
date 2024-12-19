@@ -63,31 +63,6 @@ const switchL2D = () => {
 main {
   display: flex;
   flex-direction: column;
-  zoom: 0.6;
-}
-
-@media only screen and (min-width: 830px) {
-  main {
-    zoom: 0.7;
-  }
-}
-
-@media only screen and (min-width: 940px) {
-  main {
-    zoom: 0.8;
-  }
-}
-
-@media only screen and (min-width: 1060px) {
-  main {
-    zoom: 0.9;
-  }
-}
-
-@media only screen and (min-width: 1175px) {
-  main {
-    zoom: 1;
-  }
 }
 
 #app:has(.rotate-notification) main,
@@ -190,6 +165,34 @@ main {
 </style>
 
 <style>
+main, .arco-overlay {
+  zoom: 0.6;
+}
+
+@media only screen and (min-width: 830px) {
+  main, .arco-overlay {
+    zoom: 0.7;
+  }
+}
+
+@media only screen and (min-width: 940px) {
+  main, .arco-overlay {
+    zoom: 0.8;
+  }
+}
+
+@media only screen and (min-width: 1060px) {
+  main, .arco-overlay {
+    zoom: 0.9;
+  }
+}
+
+@media only screen and (min-width: 1175px) {
+  main, .arco-overlay {
+    zoom: 1;
+  }
+}
+
 .arco-modal-body:has(.id-card) {
     max-width: unset !important;
   }
