@@ -165,30 +165,30 @@ main {
 </style>
 
 <style>
-main, .arco-overlay {
+main, .arco-overlay, .loading_wrapper {
   zoom: 0.6;
 }
 
 @media only screen and (min-width: 830px) {
-  main, .arco-overlay {
+  main, .arco-overlay, .loading_wrapper {
     zoom: 0.7;
   }
 }
 
 @media only screen and (min-width: 940px) {
-  main, .arco-overlay {
+  main, .arco-overlay, .loading_wrapper {
     zoom: 0.8;
   }
 }
 
 @media only screen and (min-width: 1060px) {
-  main, .arco-overlay {
+  main, .arco-overlay, .loading_wrapper {
     zoom: 0.9;
   }
 }
 
 @media only screen and (min-width: 1175px) {
-  main, .arco-overlay {
+  main, .arco-overlay, .loading_wrapper {
     zoom: 1;
   }
 }
