@@ -32,6 +32,11 @@
       "name": "DataNRO",
       "href": "https://electroheavenvn.github.io/DataNRO/",
       "imgSrc": "/icon/datanro.png"
+    },
+    {
+      "name": "NROIPChanger",
+      "href": "https://github.com/ElectroHeavenVN/NROIPChanger",
+      "imgSrc": "/icon/NROIPChanger.png"
     }
   ],
   "contact": [

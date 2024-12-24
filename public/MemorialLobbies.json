@@ -19,6 +19,16 @@
             "scale": 0.65,
             "x": 900,
             "y": 1280
+        },
+        {
+            "name": "Yuuka_Pajama",
+            "path": "MemorialLobbies/P.Yuuka/",
+            "skel": "CH0284_home.skel",
+            "atlas": "CH0284_home.atlas",
+            "bgm": "Theme_216.ogg",
+            "scale": 0.58,
+            "x": 960,
+            "y": 1280
         }
     ],
     "random": [
