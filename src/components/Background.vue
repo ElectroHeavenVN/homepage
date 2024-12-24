@@ -26,6 +26,7 @@ const onEvent = (entry, event) => {
   console.log(event);
   if (event.stringValue == '')
     return;
+  console.log(event.stringValue);
   let pathname = window.location.pathname;
   if (!pathname.endsWith('/')) 
       pathname += '/';
@@ -81,6 +82,9 @@ const setL2D = (num) => {
   let startIdle = 'Start_Idle_01';
   if (!animation.state.data.skeletonData.findAnimation('Start_Idle_01'))  //Special case for Hoshino_Armed
     startIdle = 'Start_idle_01';
+  animation.state.addListener({
+    event: onEvent
+  });
   if (animation.state.data.skeletonData.findAnimation(startIdle)) {
     changeL2D(true);
     animation.state.setAnimation(0, startIdle, false);
