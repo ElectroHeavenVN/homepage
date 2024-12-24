@@ -23,7 +23,6 @@ document.querySelector('#background').appendChild(l2d.canvas);
 const emit = defineEmits(['update:changeL2D']);
 
 const onEvent = (entry, event) => {
-  console.log(event);
   if (event.stringValue == '')
     return;
   console.log(event.stringValue);
@@ -60,6 +59,10 @@ const setL2D = (num) => {
     for (var i in soundList) 
       soundList[i].stop();
     soundList = [];
+  }  
+  if (animation) {
+    animation.state.setEmptyAnimation(1);
+    animation.state.setEmptyAnimation(2);
   }
   l2d.stage.removeChildren();
   switch (num) {
@@ -121,6 +124,13 @@ const setL2D = (num) => {
 const skipStartIdle = () => {
   if (animation.state.getCurrent(0).animation.name != "Idle_01" && animation.state.data.skeletonData.findAnimation('Idle_01')) {
     changeL2D(false);
+    if (soundList.length != 0) {
+      for (var i in soundList) 
+        soundList[i].stop();
+      soundList = [];
+    }
+    animation.state.setEmptyAnimation(1);
+    animation.state.setEmptyAnimation(2);
     animation.state.setAnimation(0, 'Idle_01', true);
     animation.state.listeners = [];
     animation.state.addListener({
