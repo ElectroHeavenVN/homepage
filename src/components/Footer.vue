@@ -70,6 +70,7 @@ if (!pathname.endsWith('/'))
   display: inline-flex;
   align-items: flex-end;
   overflow: auto;
+  scrollbar-width: none;
 }
 
 .project-box::-webkit-scrollbar {

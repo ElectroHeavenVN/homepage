@@ -19,9 +19,9 @@
       }
     ]
   },
-  "level": 83,
-  "exp": 7650,
-  "nextExp": 8381,
+  "level": 89,
+  "exp": 25120,
+  "nextExp": 26670,
   "dock": [
     {
       "name": "Discord Server",
@@ -62,7 +62,7 @@
     }
   ],
   "task": {
-    "name": "Blog",
-    "href": "https://electroheavenvn.github.io/blog"
+    "name": "Shop",
+    "href": "https://electroheavenvn.github.io/shop"
   }
 }
