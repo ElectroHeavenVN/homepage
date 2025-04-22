@@ -11,23 +11,33 @@
             "y": 1280
         },
         {
-            "name": "Airi_Band",
-            "path": "MemorialLobbies/B.Airi/",
-            "skel": "CH0251_home.skel",
-            "atlas": "CH0251_home.atlas",
-            "bgm": "Theme_222.ogg",
-            "scale": 0.65,
-            "x": 900,
+            "name": "Rei",
+            "path": "MemorialLobbies/Rei/",
+            "skel": "CH0245_home.skel",
+            "atlas": "CH0245_home.atlas",
+            "bgm": "Theme_263.ogg",
+            "scale": 0.58,
+            "x": 960,
             "y": 1280
         },
         {
-            "name": "Yuuka_Pajama",
-            "path": "MemorialLobbies/P.Yuuka/",
-            "skel": "CH0284_home.skel",
-            "atlas": "CH0284_home.atlas",
-            "bgm": "Theme_216.ogg",
+            "name": "Hikari",
+            "path": "MemorialLobbies/Hikari/",
+            "skel": "CH0242_home.skel",
+            "atlas": "CH0242_home.atlas",
+            "bgm": "Theme_266.ogg",
             "scale": 0.58,
             "x": 960,
+            "y": 1280
+        },
+        {
+            "name": "Mari_Idol",
+            "path": "MemorialLobbies/I.Mari/",
+            "skel": "CH0273_home.skel",
+            "atlas": "CH0273_home.atlas",
+            "bgm": "Theme_234.ogg",
+            "scale": 0.6,
+            "x": 900,
             "y": 1280
         }
     ],
@@ -59,6 +69,16 @@
             "atlas": "CH9999_home.atlas",
             "bgm": "BlueNewWorld_Lobby.ogg",
             "scale": 0.6,
+            "x": 900,
+            "y": 1280
+        },
+        {
+            "name": "Airi_Band",
+            "path": "MemorialLobbies/B.Airi/",
+            "skel": "CH0251_home.skel",
+            "atlas": "CH0251_home.atlas",
+            "bgm": "Theme_222.ogg",
+            "scale": 0.65,
             "x": 900,
             "y": 1280
         },
@@ -143,16 +163,6 @@
             "y": 1280
         },
         {
-            "name": "Mari_Idol",
-            "path": "MemorialLobbies/I.Mari/",
-            "skel": "CH0273_home.skel",
-            "atlas": "CH0273_home.atlas",
-            "bgm": "Theme_234.ogg",
-            "scale": 0.6,
-            "x": 900,
-            "y": 1280
-        },
-        {
             "name": "Sakurako_Idol",
             "path": "MemorialLobbies/I.Sakurako/",
             "skel": "CH0274_home.skel",
@@ -181,7 +191,17 @@
             "scale": 0.6,
             "x": 900,
             "y": 1280
+        },
+        {
+            "name": "Yuuka_Pajama",
+            "path": "MemorialLobbies/P.Yuuka/",
+            "skel": "CH0284_home.skel",
+            "atlas": "CH0284_home.atlas",
+            "bgm": "Theme_216.ogg",
+            "scale": 0.58,
+            "x": 960,
+            "y": 1280
         }
     ],
-    "randomAmount": 4
+    "randomAmount": 6
 }
