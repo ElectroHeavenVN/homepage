@@ -123,17 +123,17 @@ setInterval(() => {
       <span>49,658</span>
     </div>
     <a
-      class="about toolbox"
+      class="about toolbox css-cursor-hover-enabled"
       @click="about"
       :style="{
         transform: (!props.l2dOnly ? 'translateY(0)' : 'translateY(-300px)') + ' skew(-10deg)',
         transition: 'transform 0.3s ' + (!props.l2dOnly ? 'ease-out' : 'ease-in')
       }"
     >
-      <icon-info-circle class="css-cursor-hover-enabled" />
+      <icon-info-circle />
     </a>
     <a 
-    class="toolbox github"
+    class="toolbox github css-cursor-hover-enabled"
     :style="{
         transform: (!props.l2dOnly ? 'translateY(0)' : 'translateY(-300px)') + ' skew(-10deg)',
         transition: 'transform 0.3s ' + (!props.l2dOnly ? 'ease-out' : 'ease-in')
@@ -143,7 +143,7 @@ setInterval(() => {
       <img src="/icon/github.svg" alt="GitHub Repository" />
     </a>
     <a
-      class="l2d toolbox"
+      class="l2d toolbox css-cursor-hover-enabled"
       :class="{ canHover: !hover }"
       @click="change"
       @mousedown="l2dHold"

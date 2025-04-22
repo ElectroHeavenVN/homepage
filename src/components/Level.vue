@@ -21,7 +21,7 @@ const showGameInfo = () => {
 </script>
 
 <template>
-  <div class="level-box" @click="showGameInfo">
+  <div class="level-box css-cursor-hover-enabled" @click="showGameInfo">
     <div class="container">
       <div class="level css-cursor-hover-enabled">
         <span>Lv.</span>

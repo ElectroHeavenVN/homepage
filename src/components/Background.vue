@@ -165,10 +165,8 @@ const onInteractionWithStudent = () => {
     <img class="css-cursor-hover-enabled" @click="setL2D('-')" src="/img/arrow.png" alt="" />
     <img class="css-cursor-hover-enabled" @click="setL2D('+')" src="/img/arrow.png" alt="" />
   </div>
-  <div style="color: transparent; position: fixed; top: 0; left: 0; width: 100%; height: 100%;"
-    @click="onInteractionWithStudent()"></div>
-  <div v-if="props.l2dOnly && canSkip" style="color: transparent; position: fixed; top: 0; left: 0; width: 100%; height: 100%;"
-    @click="skipStartIdle()"></div>
+  <div class="interaction css-cursor-hover-enabled" @click="onInteractionWithStudent()"></div>
+  <div v-if="props.l2dOnly && canSkip" style="position: fixed; width: 100%; height: 100%;" @click="skipStartIdle()"></div>
 </template>
 
 <style scoped>
@@ -181,6 +179,15 @@ const onInteractionWithStudent = () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.interaction {
+  position: fixed; 
+  top: 17%;
+  left: 17%;
+  width: 66%;
+  height: 66%;
+  cursor: pointer;
 }
 
 img {
