@@ -97,13 +97,15 @@ const setL2D = (num) => {
       animation.state.addAnimation(0, 'Idle_01', true);
     }
     let listener = {
-      complete: () => {
-        changeL2D(false);
-        animation.state.listeners = [];
-        animation.state.addListener({
-          event: onEvent
-        });
-        canSkip = false;
+      complete: (entry) => {
+        if (entry.trackIndex == 0 && entry.animation.name != "Idle_01") {
+          changeL2D(false);
+          animation.state.listeners = [];
+          animation.state.addListener({
+            event: onEvent
+          });
+          canSkip = false;
+        }
       }
     }
     animation.state.addListener(listener);
