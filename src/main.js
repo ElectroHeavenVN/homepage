@@ -1,10 +1,10 @@
-import '@/assets/index.css'
+import './assets/index.css'
 import '@arco-design/web-vue/dist/arco.css'
 
 import { createApp } from 'vue'
 import ArcoVue from '@arco-design/web-vue'
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
-import App from '@/App.vue'
+import App from './App.vue'
 import * as PIXI from 'pixi.js'
 import { sound } from '@pixi/sound'
 import * as pixiSpine from "@esotericsoftware/spine-pixi-v8";

@@ -72,7 +72,7 @@ img {
 
 @font-face {
   font-family: TVPS-Vain-Capital-2;
-  src: url(@/assets/font/TVPS-Vain-Capital-2.ttf);
+  src: url(./assets/font/TVPS-Vain-Capital-2.ttf);
 }
 
 .loading_wrapper {

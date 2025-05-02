@@ -1,12 +1,11 @@
 <script setup>
-import Cursor from '@/components/Cursor.vue'
-import Footer from '@/components/Footer.vue'
-import Level from '@/components/Level.vue'
-import Toolbox from '@/components/Toolbox.vue'
-import Contact from '@/components/Contact.vue'
-import Task from '@/components/Task.vue'
-import Loading from '@/components/Loading.vue'
-import Background from '@/components/Background.vue'
+import Footer from './components/Footer.vue'
+import Level from './components/Level.vue'
+import Toolbox from './components/Toolbox.vue'
+import Contact from './components/Contact.vue'
+import Task from './components/Task.vue'
+import Loading from './components/Loading.vue'
+import Background from './components/Background.vue'
 import { ref } from 'vue'
 
 const loading = ref(true)
@@ -56,7 +55,6 @@ const switchL2D = () => {
     </transition>
     <div id="curtain"></div>
   </main>
-  <Cursor></Cursor>
 </template>
 
 <style scoped>

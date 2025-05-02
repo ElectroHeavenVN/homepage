@@ -61,8 +61,10 @@ const setL2D = (num) => {
     soundList = [];
   }  
   if (animation) {
-    animation.state.setEmptyAnimation(1);
-    animation.state.setEmptyAnimation(2);
+    animation.state.setAnimation(1, "Dummy", true);
+    animation.state.setAnimation(2, "Dummy", true);
+    animation.state.setAnimation(3, "Dummy", true);
+    animation.state.setAnimation(4, "Dummy", true);
   }
   l2d.stage.removeChildren();
   switch (num) {
@@ -91,13 +93,12 @@ const setL2D = (num) => {
   if (animation.state.data.skeletonData.findAnimation(startIdle)) {
     changeL2D(true);
     animation.state.setAnimation(0, startIdle, false);
-
+    if (animation.state.getCurrent(0).animation.name != "Idle_01" && animation.state.data.skeletonData.findAnimation('Idle_01')) {
+      animation.state.addAnimation(0, 'Idle_01', true);
+    }
     let listener = {
       complete: () => {
         changeL2D(false);
-        if (animation.state.getCurrent(0).animation.name != "Idle_01" && animation.state.data.skeletonData.findAnimation('Idle_01')) {
-          animation.state.setAnimation(0, 'Idle_01', true);
-        }
         animation.state.listeners = [];
         animation.state.addListener({
           event: onEvent
@@ -129,8 +130,10 @@ const skipStartIdle = () => {
         soundList[i].stop();
       soundList = [];
     }
-    animation.state.setEmptyAnimation(1);
-    animation.state.setEmptyAnimation(2);
+    animation.state.setAnimation(1, "Dummy", true);
+    animation.state.setAnimation(2, "Dummy", true);
+    animation.state.setAnimation(3, "Dummy", true);
+    animation.state.setAnimation(4, "Dummy", true);
     animation.state.setAnimation(0, 'Idle_01', true);
     animation.state.listeners = [];
     animation.state.addListener({
@@ -144,20 +147,17 @@ const onInteractionWithStudent = () => {
   if (talking || animation.state.getCurrent(0).animation.name.toLowerCase().startsWith('start_idle')) 
     return;
   console.log('Talk_0' + talkIndex);
-  animation.state.addAnimation(1, 'Talk_0' + talkIndex + '_A');
-  animation.state.addAnimation(2, 'Talk_0' + talkIndex + '_M');
+  animation.state.addAnimation(1, 'Talk_0' + talkIndex + '_A')._mixDuration = 0.3;
+  animation.state.addAnimation(2, 'Talk_0' + talkIndex + '_M')._mixDuration = 0.3;
+  animation.state.addAnimation(1, "Dummy", true)._mixDuration = 0.3;
+  animation.state.addAnimation(2, "Dummy", true)._mixDuration = 0.3;
   talkIndex++;
   if (!animation.state.data.skeletonData.findAnimation('Talk_0' + talkIndex + '_A')) 
     talkIndex = 1;
   talking = true;
 }
 
-//There are some problem with Sakurako_Idol which I didn't know how to fix yet
-// let sakurakoIdolIndex = memorialLobbies.findIndex(s => s.name === 'Sakurako_Idol');
-// if (sakurakoIdolIndex !== -1) 
-//   setL2D(sakurakoIdolIndex);
-// else
-  setL2D(Math.floor(Math.random() * memorialLobbies.length));
+setL2D(Math.floor(Math.random() * memorialLobbies.length));
 </script>
 
 <template>
@@ -188,6 +188,8 @@ const onInteractionWithStudent = () => {
   width: 66%;
   height: 66%;
   cursor: pointer;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 img {
